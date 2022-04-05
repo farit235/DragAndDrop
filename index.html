@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Input Drag n Drop</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="js/main.js" defer></script>
+
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script type="text/javascript">
+      google.charts.load("current", { packages: ["corechart"] });
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ["Element", "Фаза луны", { role: "style" }],
+          ["22-12-1978", 0.7347586781715747, "light-blue"],
+          ["03-09-1981", 0.14840280947558127, "light-blue"],
+          ["12-06-1982", 0.6759592848051723, "light-blue"],
+          ["25-07-1982", 0.1435859155593585, "light-blue"],
+          ["13-08-1982", 0.7914935057340645, "light-blue"],
+          ["16-08-1982", 0.893794704185664, "light-blue"],
+          ["08-09-1982", 0.6765661599418687, "light-blue"],
+          ["15-09-1982", 0.9147276513312864, "light-blue"],
+          ["11-12-1982", 0.8525474344174486, "light-blue"],
+        ]);
+
+        var view = new google.visualization.DataView(data);
+        view.setColumns([
+          0,
+          1,
+          {
+            calc: "stringify",
+            sourceColumn: 1,
+            type: "string",
+            role: "annotation",
+          },
+          2,
+        ]);
+
+        var options = {
+          title: "График фаз луны в определенной дате",
+          width: 900,
+          height: 400,
+          bar: { groupWidth: "85%" },
+          legend: { position: "none" },
+        };
+        var chart = new google.visualization.ColumnChart(
+          document.getElementById("columnchart_values")
+        );
+        chart.draw(view, options);
+      }
+    </script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Ваш подручный детектив</h1>
+      </header>
+      <div class="icon">
+        <img class="img" src="components/download.png" />
+      </div>
+      <section class="droparea">
+        <p>Перетащите ваш файл сюда!</p>
+      </section>
+      <div class="chart-box">
+        <div
+          class="chart"
+          id="columnchart_values"
+          style="width: 900px; height: 300px"
+        ></div>
+      </div>
+      <div class="info">
+        <div class="header-discription">Немного информации про фазы Луны</div>
+        <div class="discription">
+          <p>
+            <b>Фазы Луны</b> – периодически меняющиеся степени освещенности Луны
+            Солнцем. Выделяют следующие фазы:
+            <i>новолуние, растущая Луна</i> (первая фаза, первая четверть,
+            вторая фаза), <i>полнолуние</i> и <i>убывающая Луна</i> (третья
+            фаза, третья четверть, четвертая фаза).
+          </p>
+          <p>
+            Луна влияет на жизненную активность человека, его самочувствие.
+            Лунный гороскоп подскажет, когда лучше начинать новые дела, менять
+            место работы, решать денежные вопросы, знакомиться с новыми людьми,
+            работать по дому, стричься, обращать особое внимание на здоровье.
+          </p>
+        </div>
+        <div class="header-discription">Какие бывают фазы Луны</div>
+        <div class="discription">
+          <div class="list">
+            <div class="moon">
+              <img class="img-moon" src="components/Moon.svg.png" />
+            </div>
+            <ol>
+              <li><b>Новолуние</b> - состояние, когда Луна не видна</li>
+              <li>
+                <b>Молодая луна</b> — первое появление Луны на небе после
+                новолуния в виде узкого серпа.
+              </li>
+              <li>
+                <b>Первая четверть</b> — состояние, когда освещена половина
+                Луны.
+              </li>
+              <li><b>Прибывающая луна</b>.</li>
+              <li>
+                <b>Полнолуние</b> — состояние, когда освещена вся Луна целиком.
+              </li>
+              <li><b>Убывающая луна</b>.</li>
+              <li>
+                <b>Последняя четверть</b> — состояние, когда снова освещена
+                половина Луны.
+              </li>
+              <li><b>Старая луна</b>.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <canvas id="canvas"></canvas>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+  </body>
+</html>
